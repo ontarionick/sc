@@ -22,4 +22,5 @@ total_count = data.groupby("SEX").count()["is_management"]
 in_management_rate = round(100.0 * in_management / total_count, 2)
 
 print(f"Percentage in management occupations by sex: {in_management_rate}")
-in_management_rate.plot(kind="bar")
+in_management_rate.plot(kind="bar", title="Percentage in Management Occupation by Sex")
+plt.show()

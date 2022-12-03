@@ -16,13 +16,13 @@ VARIABLES_TO_APPLY_MAPPING = [
     "SEX",
     "FTPTMAIN",
     "WHYPT",
-    "PROV", # ADDED TO SUPPORT LATER TASKS
-    "AGE_12", # ADDED TO SUPPORT LATER TASKS
-    "NAICS_21", # ADDED TO SUPPORT LATER TASKS
-    "NOC_10", # ADDED TO SUPPORT LATER TASKS
-    "NOC_40", # ADDED TO SUPPORT LATER TASKS
-    "EDUC", # ADDED TO SUPPORT LATER TASKS
-    "COWMAIN", # ADDED TO SUPPORT LATER TASKS
+    "PROV",      # ADDED TO SUPPORT LATER TASKS
+    "AGE_12",    # ADDED TO SUPPORT LATER TASKS
+    "NAICS_21",  # ADDED TO SUPPORT LATER TASKS
+    "NOC_10",    # ADDED TO SUPPORT LATER TASKS
+    "NOC_40",    # ADDED TO SUPPORT LATER TASKS
+    "EDUC",      # ADDED TO SUPPORT LATER TASKS
+    "COWMAIN",   # ADDED TO SUPPORT LATER TASKS
 ]
 
 VARIABLES_TO_KEEP = [
@@ -43,12 +43,15 @@ VARIABLES_TO_KEEP = [
 
 mapped_dataframes = []
 
+
 def pub_path(folder):
     year, month = folder.split("-")
     return f"pub{month}{year[-2:]}.csv"
 
+
 def recode_variable(variable, mapping):
     return variable.map(mapping)
+
 
 for folder in sorted(data_folders):
     print(f"Applying mappings for data in folder {folder}.")
@@ -57,12 +60,17 @@ for folder in sorted(data_folders):
 
     for variable in VARIABLES_TO_APPLY_MAPPING:
         print(f"Applying mapping for variable {variable}.")
-        mapping_path = os.path.join(DOWNLOAD_PATH, folder, f"{variable.lower()}_codes.csv")
+        file_path = f"{variable.lower()}_codes.csv"
+        mapping_path = os.path.join(DOWNLOAD_PATH, folder, file_path)
+
         mapping = pd.read_csv(mapping_path)
         mapping[["code"]] = mapping[["code"]].astype("Int64").astype(str)
         mapping = mapping.set_index("code").to_dict()["en_label"]
 
-        month_data[[variable]] = month_data[[variable]].astype("Int64").astype(str)
+        month_data[[variable]] = month_data[[variable]]\
+            .astype("Int64")\
+            .astype(str)
+
         month_data = month_data.replace({variable: mapping})
         print(f"Applied mapping for variable {variable}.")
     print(f"Applied mappings for data in folder {folder}.\n")
@@ -102,7 +110,7 @@ VOLUNTARY_PT_CODES = [
 ]
 
 merged_data["VOLUNTARY_PT"] = merged_data["WHYPT"].isin(VOLUNTARY_PT_CODES)
-merged_data = merged_data[[ *VARIABLES_TO_KEEP ]]
+merged_data = merged_data[[*VARIABLES_TO_KEEP]]
 
 # TODO: Add data quality checks here.
 

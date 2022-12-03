@@ -7,28 +7,35 @@ data = pd.read_csv("./data/merged_data.csv")
 # Task requests that only data from January to Septempber is used.
 data = data[data["SURVMNTH"] < 10]
 
-## Question 1 - Unemployment Rate
+# Question 1 - Unemployment Rate
 # Unemployment rate is defined as the number of unemployed people divided
 # by the number of people in the labour force.
 in_labour_force = data[data["LFSSTAT"] != "Not in labour force"].copy()
 in_labour_force["unemployed"] = in_labour_force["LFSSTAT"] == "Unemployed"
 
 unemployed_count = in_labour_force.groupby("QUARTER").sum()["unemployed"]
-in_labour_force_count = in_labour_force.groupby("QUARTER").count()["unemployed"]
-unemployment_rate = 100.0 *  unemployed_count / in_labour_force_count
+in_labour_force_count = in_labour_force\
+    .groupby("QUARTER")\
+    .count()["unemployed"]
+unemployment_rate = 100.0 * unemployed_count / in_labour_force_count
 unemployment_rate = unemployment_rate.round(2)
 print(f"Unemployment rate by quarter: {unemployment_rate}")
-unemployment_rate.plot(x="QUARTER", y="unemployed", kind="line",
-    ylim=(0, 10), xticks=range(1, 4), title="Unemployment Rate by Quarter (2022)")
+unemployment_rate.plot(x="QUARTER",
+                       y="unemployed",
+                       kind="line",
+                       ylim=(0, 10),
+                       xticks=range(1, 4),
+                       title="Unemployment Rate by Quarter (2022)")
+
 plt.show()
 
-## Question 2 - Youth Tertiary Education Attainment by Province
+# Question 2 - Youth Tertiary Education Attainment by Province
 
 # Note that I find it a bit odd that 15 to 19 years of age is included in
 # this metric, as there is very little chance they can attain full tertiary
 # education.
 
-YOUTH_BRACKETS = [ "15 to 19 years", "20 to 24 years", "25 to 29 years" ]
+YOUTH_BRACKETS = ["15 to 19 years", "20 to 24 years", "25 to 29 years"]
 youth = data[data["AGE_12"].isin(YOUTH_BRACKETS)].copy()
 
 
@@ -49,12 +56,17 @@ tertiary_education_rate = tertiary_education_rate.round(2)
 
 tertiary_education_rate = tertiary_education_rate.sort_values(ascending=False)
 
-print(f"Percentage of youth with tertiary education by province: {tertiary_education_rate}")
-tertiary_education_rate.plot(x="PROV", y="tertiary_education", kind="bar",
-    ylim=(0, 100), title="Percentage of Youth with Tertiary Education by Province (2022)")
+print(f"Percentage of youth with tertiary education by province: \
+      {tertiary_education_rate}")
+
+tertiary_education_rate.plot(x="PROV",
+                             y="tertiary_education",
+                             kind="bar",
+                             ylim=(0, 100),
+                             title="Percentage of Youth with Tertiary Education by Province (2022)")
 plt.show()
 
-## Question 3 - Top 5 Industries for Involuntary Part-Time Employment
+# Question 3 - Top 5 Industries for Involuntary Part-Time Employment
 
 """
 I will be using the NAICS_21 column to determine industry.
@@ -74,6 +86,8 @@ print(f"Percentage of part-time workers involuntarily part-time by industry: \
     {top_involuntary_pt_rate}")
 
 top_involuntary_pt_rate = top_involuntary_pt_rate.sort_values(ascending=True)
-top_involuntary_pt_rate.plot(x="NAICS_21", y="INVOLUNTARY_PT", kind="barh", \
-    title="Top 5 Industries for Involuntary Part-Time Employment (2022)")
+top_involuntary_pt_rate.plot(x="NAICS_21",
+                             y="INVOLUNTARY_PT",
+                             kind="barh",
+                             title="Top 5 Industries for Involuntary Part-Time Employment (2022)")
 plt.show()
