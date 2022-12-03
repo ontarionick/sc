@@ -18,7 +18,10 @@ pip install -r requirements.txt
 
 ## Usage
 
-TBD
+### Task 1
+```
+python3.10 download_data.py
+```
 
 ## Task Documentation
 
