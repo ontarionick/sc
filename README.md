@@ -32,7 +32,11 @@ python3.10 create_mapping.py
 
 You should see console output as the mapping for each variable of interest for each month of the downloaded data is created and saved to disk.
 
-It's worth noting that there was a typo in one of the column names ("Start / Fin" instead of "End / Fin") for January - April. This doesn't have any effect on this or any other tasks, though.
+#### Worth Noting
+
+- There was a typo in one of the column names ("Start / Fin" instead of "End / Fin") for January - April. This doesn't have any effect on this or any other tasks, though.
+- I noticed that later tasks required additional variables to be mapped, so I added these later and left comments in the file.
+- I noticed that several variable names had leading and/or trailing whitespace that was affecting my work in later tasks, so I stripped these out as I can't see any reason to keep it.
 
 ## Task Documentation
 

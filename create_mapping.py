@@ -6,6 +6,8 @@ import pandas as pd
 
 data_folders = os.listdir(DOWNLOAD_PATH)
 
+KEY_CODES_FILENAME = "LFS_PUMF_EPA_FGMD_variables.csv"
+
 COLUMNS_TO_RENAME = {
     "Variable / \nVariable": "variable",
     "Code / \nCode": "code",
@@ -19,12 +21,18 @@ VARIABLES_OF_INTEREST = [
     "educ",
     "noc_40",
     "age_12",
+    "noc_10",   # ADDED TO SUPPORT LATER TASKS
+    "lfsstat",  # ADDED TO SUPPORT LATER TASKS
+    "sex",      # ADDED TO SUPPORT LATER TASKS
+    "ftptmain", # ADDED TO SUPPORT LATER TASKS
+    "cowmain",  # ADDED TO SUPPORT LATER TASKS
+
 ]
 
 for folder in sorted(data_folders):
     print(f"Creating mapping for data in folder {folder}.")
 
-    key_code_path = os.path.join(DOWNLOAD_PATH, folder, "LFS_PUMF_EPA_FGMD_variables.csv")
+    key_code_path = os.path.join(DOWNLOAD_PATH, folder, KEY_CODES_FILENAME)
     key_codes = pd.read_csv(key_code_path, encoding='latin-1')
 
     key_codes = key_codes[[ *COLUMNS_TO_RENAME.keys() ]]
@@ -41,6 +49,9 @@ for folder in sorted(data_folders):
     """
     key_codes["variable"] = key_codes["variable"].fillna(method="ffill")
     key_codes.dropna(subset=["code"], inplace=True)
+
+    # Strip out whitespace as some variable names have unneeded whitespace.
+    key_codes["variable"] = key_codes["variable"].apply(lambda v: v.strip())
 
     key_codes = key_codes[key_codes.variable.isin(VARIABLES_OF_INTEREST)]
 
