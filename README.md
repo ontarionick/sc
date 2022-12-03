@@ -40,4 +40,11 @@ You should see console output as the mapping for each variable of interest for e
 
 ## Task Documentation
 
-TBD
+```
+python3.10 apply_mapping_and_merge_data.py
+```
+
+You should see console output as individual datasets are mapped and then merged into a final output dataset.
+
+### Worth Noting
+- The task asks for data to be output in a certain schema with a certain specification. Upon looking at later tasks, I realized that this requested schema / specification would NOT be enough to complete said tasks. I took the intitiative to modify the output of this task so that future tasks wouldn't need to redo some of the work in this task. I'm unsure if this was a mistake in the assignment itself, or to check whether we are able to assess business requirements and adjust accordingly. I'm assuming it's the latter.
