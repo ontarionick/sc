@@ -23,6 +23,16 @@ pip install -r requirements.txt
 python3.10 download_data.py
 ```
 
+### Task 2
+
+```
+python3.10 create_mapping.py
+```
+
+You should see console output as the mapping for each variable of interest for each month of the downloaded data is created and saved to disk.
+
+It's worth noting that there was a typo in one of the column names ("Start / Fin" instead of "End / Fin") for January - April. This doesn't have any effect on this or any other tasks, though.
+
 ## Task Documentation
 
 TBD
