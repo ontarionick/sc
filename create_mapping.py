@@ -26,6 +26,7 @@ VARIABLES_OF_INTEREST = [
     "sex",      # ADDED TO SUPPORT LATER TASKS
     "ftptmain", # ADDED TO SUPPORT LATER TASKS
     "cowmain",  # ADDED TO SUPPORT LATER TASKS
+    "whypt",    # ADDED TO SUPPORT LATER TASKS
 
 ]
 
@@ -59,6 +60,9 @@ for folder in sorted(data_folders):
         print(f"Creating mapping for variable {variable}.")
         variable_codes = key_codes[key_codes.variable == variable].copy()
         variable_codes.drop(columns=["variable"], inplace=True)
+
+        variable_codes.replace({ "code": { "blank": None } }, inplace=True)
+        variable_codes.code = variable_codes.code.astype("Int64").astype(str)
 
         output_path = os.path.join(DOWNLOAD_PATH, folder, f"{variable}_codes.csv")
         variable_codes.to_csv(output_path, index=False)

@@ -8,7 +8,7 @@ I've included a `requirements.txt` that you can use to install required Python d
 
 ## Installation
 
-The following installation instructions are intended for use on macOS 12.5.1, but should be adaptable to other versions / operating systems. It is assumed that you have Python and pip already installed.
+The following installation instructions are intended for use on macOS 12.5.1, but should be adaptable to other versions / operating systems. It is assumed that you have Python, pip, and python-tk already installed.
 
 Run the following in your console in the root of this repository:
 
@@ -38,7 +38,7 @@ You should see console output as the mapping for each variable of interest for e
 - I noticed that later tasks required additional variables to be mapped, so I added these later and left comments in the file.
 - I noticed that several variable names had leading and/or trailing whitespace that was affecting my work in later tasks, so I stripped these out as I can't see any reason to keep it.
 
-## Task Documentation
+## Task 3
 
 ```
 python3.10 apply_mapping_and_merge_data.py
@@ -48,3 +48,11 @@ You should see console output as individual datasets are mapped and then merged 
 
 ### Worth Noting
 - The task asks for data to be output in a certain schema with a certain specification. Upon looking at later tasks, I realized that this requested schema / specification would NOT be enough to complete said tasks. I took the intitiative to modify the output of this task so that future tasks wouldn't need to redo some of the work in this task. I'm unsure if this was a mistake in the assignment itself, or to check whether we are able to assess business requirements and adjust accordingly. I'm assuming it's the latter.
+
+## Task 4
+
+```
+python3.10 python3.10 tracking_goal_eight.py
+```
+
+For each question, you should see console output containing requested table and visualization. To show the results for the next question, close the visualization window.
