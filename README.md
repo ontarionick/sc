@@ -52,7 +52,32 @@ You should see console output as individual datasets are mapped and then merged 
 ## Task 4
 
 ```
-python3.10 python3.10 tracking_goal_eight.py
+python3.10 tracking_goal_eight.py
 ```
 
 For each question, you should see console output containing requested table and visualization. To show the results for the next question, close the visualization window.
+
+## Task 5
+For this task, I decided to pursue indicator 5.5.2 (Proportion of women in managerial positions) as I felt it would be the most likely to be easily solvable with the given dataset. I would love to dive into 5.4.1 (Proportion of time spent on unpaid domestic and care work, by sex, age and location) in the future, but I felt due to time considerations, 5.5.2 would be the best choice for now.
+
+```
+python 3.10 tracking_goal_five.py
+```
+
+You will see a table showing `% in Management` by `Sex`, as well as a bar graph visualizing the same data. As is clear from the data (men are in managerial positions at a rate almost double that of women), we have quite a ways to go.
+
+# Future Work
+## Weights
+
+I noticed that there was a variable showing weight for records, and I did not incorporate those weights into this analysis.
+
+## Converting from a collection of scripts to a library
+
+Right now, my code is a collection of scripts. I would normally factor these scripts into data pipeline stages, each containing a set of processing functions, as well as its own schematized input and output. This would allow for unit testing as well as enforcing schema and data quality checks.
+
+## Testing
+
+As mentioned above, I didn't write any tests as I wasn't sure what was expected here given the timeframe. Unit tests allow for easy incremental changes to bits and pieces of the pipeline, without being afraid of breaking other parts. The data scientist writes sample input and output data for each stage, and tests those changes both locally before pushing out code, and also automatically as part of CI/CD steps. This is a standard best practice in industry, but I didn't feel like the timeframe given for the project would allow me to do a good job of this. 
+
+## Schematization & Data Quality Checks
+As mentioned above, I would normally put more effort into enforcing pipeline stage schema and data quality checking, but again, the timeframe of this project limited the practicality of that.
