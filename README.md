@@ -22,6 +22,7 @@ pip install -r requirements.txt
 ```
 python3.10 download_data.py
 ```
+You should see console output as the data for each month (January - November of 2022) downloads and extracts to your hard drive.
 
 ### Task 2
 
